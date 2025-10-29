@@ -1,4 +1,5 @@
-import 'package:expense_monitor_app/pages/initial_page/initial_page.dart';
+import 'package:expense_monitor_app/all_app_route/all_app_route.dart';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,7 +16,9 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData( colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: InitialPage()
+      initialRoute: AllAppRoute.splashPageRoute,
+      routes: AllAppRoute.routes,
+      debugShowCheckedModeBanner: false,
     );
   }
 }

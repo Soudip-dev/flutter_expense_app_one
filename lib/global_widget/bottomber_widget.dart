@@ -11,7 +11,11 @@ class BottomberWidget {
      BottomNavigationBar(
       currentIndex: currentIndex,
       onTap: onTap,
-      
+      elevation: 10,
+      type: BottomNavigationBarType.shifting,
+      selectedItemColor: AppColors.primaryColor,
+      unselectedItemColor: Colors.grey.shade700,
+     
       items:  [
         BottomNavigationBarItem(
           icon: Container(

@@ -55,7 +55,7 @@ class HeaderWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text("Morning",style: TextStyle(fontSize: 15,color: Colors.grey.shade600)),
-                    Text("Blaszczykowski",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),)
+                    Text("Soudip",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),)
                   ],)
                 ],),
               );

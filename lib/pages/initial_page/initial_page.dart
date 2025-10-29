@@ -1,3 +1,4 @@
+import 'package:expense_monitor_app/all_app_route/all_app_route.dart';
 import 'package:expense_monitor_app/pages/home_page/home_page.dart';
 import 'package:expense_monitor_app/utils/app_colors.dart';
 import 'package:expense_monitor_app/utils/app_fonts.dart';
@@ -32,10 +33,11 @@ class InitialPage extends StatelessWidget {
       ),
       appBar: AppBar(
         centerTitle: true,
-        title: Text("Monety",style: AppFonts.appBarBoldFont25,),
+        title: Text("Monety",style: AppFonts.appBoldFont25(color: Colors.black),),
       ),
       floatingActionButton: FloatingActionButton(onPressed: (){
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage(),));
+        // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage(),));
+        Navigator.pushReplacementNamed(context, AllAppRoute.loginPageRoute);
       }, 
       backgroundColor: AppColors.primaryColor,
       child: Icon(Icons.arrow_forward

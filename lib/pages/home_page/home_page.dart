@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
           index = value;
         });
       }),
-      body: Container(
+      body: SizedBox(
         width: double.infinity,
         height: double.infinity,
         // color: Colors.amber,
