@@ -1,6 +1,7 @@
 
 import 'package:expense_monitor_app/global_widget/appbar_widget.dart';
 import 'package:expense_monitor_app/global_widget/bottomber_widget.dart';
+import 'package:expense_monitor_app/global_widget/open_drawer.dart';
 import 'package:expense_monitor_app/pages/home_page/home_page_widget/exp_total_widget.dart';
 import 'package:expense_monitor_app/pages/home_page/home_page_widget/header_widget.dart';
 import 'package:expense_monitor_app/pages/home_page/home_page_widget/list_item_widget.dart';
@@ -21,6 +22,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppbarWidget.buildAppBar(context) ,
+      drawer: OpenDrawer.buildDrawer(),
       bottomNavigationBar: BottomberWidget.bottomNavigationBar(currentIndex: index , onTap: (value){
         setState(() {
           index = value;

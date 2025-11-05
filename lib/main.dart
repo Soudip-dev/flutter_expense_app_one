@@ -1,9 +1,16 @@
 import 'package:expense_monitor_app/all_app_route/all_app_route.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp( MyApp()
+    
+  //   MultiBlocProvider(providers: [
+
+  // ], child:  )
+  
+  );
 }
 
 class MyApp extends StatelessWidget {
