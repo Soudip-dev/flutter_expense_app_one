@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 
 class AppElevetedButton extends StatelessWidget {
   final String text;
-  final Function() onPressed;
-  const AppElevetedButton({super.key, required this.text, required this.onPressed});
+  final VoidCallback ? onPressed;
+  const AppElevetedButton({super.key, required this.text,  this.onPressed});
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
+      
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.primaryColor,

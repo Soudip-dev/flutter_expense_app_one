@@ -1,14 +1,18 @@
 import 'package:expense_monitor_app/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 
-class BottomberWidget {
-  static BottomNavigationBar bottomNavigationBar({
-    required int currentIndex,
-    required Function(int) onTap,
-  }) {
-    return
+class BottomNavigationBarWidget  extends StatelessWidget{
+  final int currentIndex;
+  final Function(int) onTap;
+    BottomNavigationBarWidget({
+    super.key,
+    required this.currentIndex,
+    required this.onTap,
 
-     BottomNavigationBar(
+    });
+
+  Widget build(BuildContext context) {
+    return BottomNavigationBar(
       currentIndex: currentIndex,
       onTap: onTap,
       elevation: 10,
@@ -81,7 +85,5 @@ class BottomberWidget {
         ),
       ],
     );
-  
   }
-
 }

@@ -1,11 +1,14 @@
 import 'package:expense_monitor_app/all_app_route/all_app_route.dart';
+import 'package:expense_monitor_app/bloc/user/bloc/user_bloc_bloc.dart';
 import 'package:expense_monitor_app/global_widget/app_eleveted_button.dart';
 import 'package:expense_monitor_app/global_widget/app_textfild_widget.dart';
+import 'package:expense_monitor_app/model/user_model.dart';
 import 'package:expense_monitor_app/utils/app_colors.dart';
-import 'package:expense_monitor_app/utils/app_constant.dart';
+
 import 'package:expense_monitor_app/utils/app_fonts.dart';
 import 'package:expense_monitor_app/utils/app_specer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
@@ -23,6 +26,8 @@ class _SignupPageState extends State<SignupPage> {
   TextEditingController confirmPasswordController = TextEditingController();
   bool isPassword = true;
   bool isConfirmPassword = true;
+  bool isCreatingAccount = false;
+
   String ontapPasswordValue = "";
   String ontapConfirmPasswordValue = "";
   final _formKey = GlobalKey<FormState>();
@@ -46,7 +51,7 @@ class _SignupPageState extends State<SignupPage> {
           child: SingleChildScrollView(
             child: Form(
               key: _formKey ,
-              child: Column(
+              child:Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -239,12 +244,74 @@ class _SignupPageState extends State<SignupPage> {
                    
                      AppSpecer.hightSpecer(),
                      Column(children: [
-                      AppElevetedButton(text: "Create Account", onPressed: (){
+                      BlocConsumer< UserBlocBloc, UserBlocState>(
+                        
+                       listener: (context, state) {
+                         if(state is UserLoadingState){
+                          isCreatingAccount = true;
+                  
+                    Container(height: double.infinity,
+                    width: double.infinity,
+                    color: Colors.black12,
+                    child: Column(children: [
+                      CircularProgressIndicator(
+                      color: AppColors.primaryColor,
+                      strokeWidth: 2,
+                      
+                    ),
+                    AppSpecer.hightSpecer(20),
+                    Text("Please Wait...")
+                    ],),
+                    
+                    );
+                  }
+                  if(state is UserSuccessState ){
+                    isCreatingAccount = false;
+                    Navigator.pop(context);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        backgroundColor: Colors.green,
+                        content: Text("Account Created Successfully..."))
+                    );
+                    
+
+                  }
+                  if(state is UserErrorState){
+                    isCreatingAccount = false;
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        backgroundColor: Colors.red,
+                        content: Text("Something went wrong..."))
+                    );
+                    
+                      
+                    }
+                      },
+                      builder: (context, state) {
+                        return  AppElevetedButton(text: isCreatingAccount ? "Creating Account...": "Sign Up",
+                        onPressed: 
+                       isCreatingAccount ? null :   (){
                         if(_formKey.currentState!.validate()){
+                          context.read<UserBlocBloc>().add(
+                           AddUserEvent(mUser: UserModel(
+                            name: nameController.text,
+                            email: emailController.text,
+                            mobileNo: phoneController.text,
+                            password: passwordController.text,
+                            createdAt: DateTime.now().millisecondsSinceEpoch.toString(),
+                            imageUrl: "https://i.postimg.cc/mZnKpVgj/no-profile-icon.png"
+                           ))
+                          );
                           
-                        Navigator.pushReplacementNamed(context, AllAppRoute.loginPageRoute);
                         }
-                      }),
+                        // Navigator.pushReplacementNamed(context, AllAppRoute.loginPageRoute);
+                        
+                      }
+                      );
+                      },
+                      
+                      ),
+                     
                       AppSpecer.hightSpecer(50),
                       // /////////////////////////////////////////////////////////////////////////
                     Row(
@@ -263,6 +330,8 @@ class _SignupPageState extends State<SignupPage> {
                      ],)
               
               ],),
+           
+           
             ),
           ),
         ),

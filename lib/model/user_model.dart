@@ -23,7 +23,7 @@ class UserModel {
 
   Map<String, dynamic> toMap() {
     return {
-      AppConstant.columnUserId: uid,
+      // AppConstant.columnUserId: uid,
       AppConstant.columnUserEmail: email,
       AppConstant.columnUserName: name,
       AppConstant.columnUserMobNo: mobileNo,

@@ -1,4 +1,7 @@
 
+import 'package:expense_monitor_app/all_app_route/all_app_route.dart';
+import 'package:expense_monitor_app/global_widget/app_alert_dialog.dart';
+import 'package:expense_monitor_app/global_widget/app_drawer.dart';
 import 'package:expense_monitor_app/global_widget/appbar_widget.dart';
 import 'package:expense_monitor_app/global_widget/bottomber_widget.dart';
 import 'package:expense_monitor_app/global_widget/open_drawer.dart';
@@ -6,7 +9,9 @@ import 'package:expense_monitor_app/pages/home_page/home_page_widget/exp_total_w
 import 'package:expense_monitor_app/pages/home_page/home_page_widget/header_widget.dart';
 import 'package:expense_monitor_app/pages/home_page/home_page_widget/list_item_widget.dart';
 
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -21,9 +26,40 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppbarWidget.buildAppBar(context) ,
-      drawer: OpenDrawer.buildDrawer(),
-      bottomNavigationBar: BottomberWidget.bottomNavigationBar(currentIndex: index , onTap: (value){
+      appBar: AppbarWidget.buildAppBar(context,
+     leadingWidget: Builder(
+       builder: (context) {
+         return IconButton(onPressed: (){
+          Scaffold.of(context).openDrawer();
+         }, icon: Icon(Icons.menu));
+       }
+     ),
+      
+      
+      onTap: ()async {
+        
+        
+        AppAlertDialog.showConfirmationDialog(
+          context: context, 
+          title: "Logout",
+          content: "Are you sure you want to logout?",
+          onConfirm: ()async{
+            SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.clear();
+        
+        Navigator.pushNamedAndRemoveUntil(context, AllAppRoute.loginPageRoute, (route) => false);
+        
+
+          },
+          confirmText: "Yes",
+          cancelText: "No",
+          
+          
+          );
+
+      },) ,
+      drawer:OpenDrawer.buildDrawer(),
+      bottomNavigationBar: BottomNavigationBarWidget(currentIndex: index , onTap: (value){
         setState(() {
           index = value;
         });

@@ -1,8 +1,10 @@
 import 'package:expense_monitor_app/all_app_route/all_app_route.dart';
 import 'package:expense_monitor_app/pages/home_page/home_page.dart';
 import 'package:expense_monitor_app/utils/app_colors.dart';
+import 'package:expense_monitor_app/utils/app_constant.dart';
 import 'package:expense_monitor_app/utils/app_fonts.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class InitialPage extends StatelessWidget {
   const InitialPage({super.key});
@@ -35,9 +37,16 @@ class InitialPage extends StatelessWidget {
         centerTitle: true,
         title: Text("Monety",style: AppFonts.appBoldFont25(color: Colors.black),),
       ),
-      floatingActionButton: FloatingActionButton(onPressed: (){
+      floatingActionButton: FloatingActionButton(onPressed: ()async{
         // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage(),));
+         SharedPreferences pref  = await SharedPreferences.getInstance();
+         int isLogin = await pref.getInt(AppConstant.prefUserId) ?? 0;
+         if(isLogin != 0){
+          Navigator.pushReplacementNamed(context, AllAppRoute.homePageRoute);
+         }else{
+
         Navigator.pushReplacementNamed(context, AllAppRoute.loginPageRoute);
+         }
       }, 
       backgroundColor: AppColors.primaryColor,
       child: Icon(Icons.arrow_forward

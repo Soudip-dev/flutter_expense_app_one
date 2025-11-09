@@ -9,9 +9,11 @@ part 'user_bloc_state.dart';
 class UserBlocBloc extends Bloc<UserBlocEvent, UserBlocState> {
   DbHelper dbHelper ;
   UserBlocBloc( {required this.dbHelper}) : super(UserBlocInitial()) {
-    on<AddUserEvent>((event, emit) {
+
+    on<AddUserEvent>((event, emit) async {
        emit(UserLoadingState());
-       int check = dbHelper.createUser(newUser: event.mUser) as int;
+       int check =await dbHelper.createUser(newUser: event.mUser)  ;
+       
       
       if(check==3){
         emit(UserSuccessState());
@@ -25,13 +27,15 @@ class UserBlocBloc extends Bloc<UserBlocEvent, UserBlocState> {
     });
 
 
-    on<LoginUserEvent>((event, emit) {
+    on<LoginUserEvent>((event, emit) async{
       emit(UserLoadingState());
-      bool check = dbHelper.login(event.userEmail, event.userPassword) as bool;
-      if(check){
+      int check =await dbHelper.login(event.userEmail, event.userPassword);
+      if(check == 1){
         emit(UserSuccessState());
+      } else if (check == 3) {
+        emit(UserErrorState(errMessage: "Password Incorrect."));
       } else {
-        emit(UserErrorState(errMessage: "Invalid email or password"));
+        emit(UserErrorState(errMessage: "Email Invalid."));
       }
       
     },);

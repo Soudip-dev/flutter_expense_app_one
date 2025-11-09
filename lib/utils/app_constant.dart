@@ -12,8 +12,11 @@ class AppConstant {
   static const String imgAppLogoOutlineBlack = "assets/icons/ic_app_logo_outline.png";
 
 
+  static const String prefUserId = "pref_user_id";
+
+
   
-  static const String dbName = "expensoDB.db";
+  static const String dbName = "expensDb.db";
   static const String expTable = "expense";
   ///columns
   

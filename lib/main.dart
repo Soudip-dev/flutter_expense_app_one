@@ -1,14 +1,17 @@
 import 'package:expense_monitor_app/all_app_route/all_app_route.dart';
+import 'package:expense_monitor_app/bloc/user/bloc/user_bloc_bloc.dart';
+import 'package:expense_monitor_app/db/local_db/db_helper.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
-  runApp( MyApp()
+  runApp( 
     
-  //   MultiBlocProvider(providers: [
+    MultiBlocProvider(providers: [
+      BlocProvider(create: (context) => UserBlocBloc(dbHelper: DbHelper.instance),)
 
-  // ], child:  )
+  ], child:  MyApp())
   
   );
 }
