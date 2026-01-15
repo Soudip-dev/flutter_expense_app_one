@@ -1,3 +1,5 @@
+import 'package:expense_monitor_app/model/category_model.dart';
+
 class AppConstant {
   ///imgPath
   static const String imgCoffee = "assets/icons/coffee.png";
@@ -39,4 +41,22 @@ class AppConstant {
   static const String columnUserPass = "u_pass";
   static const String columnUserImageUrl = "u_img";
   static const String columnUserCreatedAt = "u_created_at";
+
+  // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+   static List <String> timeList = ["Daily","Weekly","Monthly","Yearly"];
+  static List <String> dbCr = ["Debit","Credit"];
+
+
+  static List <CategoryModel> categoryList = [
+    CategoryModel(categoryId: 1, categoryName: "Coffee", categoryImage: AppConstant.imgCoffee),
+    CategoryModel(categoryId: 2, categoryName: "Fast Food", categoryImage: AppConstant.imgFastFood),
+    CategoryModel(categoryId: 3, categoryName: "Travel", categoryImage: AppConstant.imgTravel),
+    CategoryModel(categoryId: 4, categoryName: "Snack", categoryImage: AppConstant.imgSnack),
+    CategoryModel(categoryId: 5, categoryName: "Shopping", categoryImage: AppConstant.imgShopping),
+    CategoryModel(categoryId: 6, categoryName: "Movie", categoryImage: AppConstant.imgMovie),
+    CategoryModel(categoryId: 7, categoryName: "Restaurant", categoryImage: AppConstant.imgRestaurant),
+  ];
+
+
 }

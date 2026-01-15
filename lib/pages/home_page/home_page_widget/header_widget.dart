@@ -1,3 +1,5 @@
+import 'package:expense_monitor_app/global_widget/app_dropdown_menu.dart';
+import 'package:expense_monitor_app/utils/app_constant.dart';
 import 'package:flutter/material.dart';
 
 class HeaderWidget extends StatelessWidget {
@@ -28,13 +30,17 @@ class HeaderWidget extends StatelessWidget {
                   color: Colors.blue.shade100,
                   borderRadius: BorderRadius.circular(8)
                 ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                Text("This Month",style: TextStyle(fontSize: 15,),),
-                Icon(Icons.keyboard_arrow_down,size: 30,)
-              ],),
+              child:  AppDropdownMenu.buildDropDownMenu(hint: AppConstant.timeList[0], items: AppConstant.timeList.map((e) => DropdownMenuItem(child: Text(e),value: e,)).toList(), onChanged: (value){
+                print(value);
+              })
+              
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   crossAxisAlignment: CrossAxisAlignment.center,
+              //   children: [
+              //   Text("This Month",style: TextStyle(fontSize: 15,),),
+              //   Icon(Icons.keyboard_arrow_down,size: 30,)
+              // ],),
               );
   }
 

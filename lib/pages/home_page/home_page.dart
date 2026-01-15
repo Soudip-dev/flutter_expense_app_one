@@ -1,9 +1,9 @@
 
 import 'package:expense_monitor_app/all_app_route/all_app_route.dart';
 import 'package:expense_monitor_app/global_widget/app_alert_dialog.dart';
-import 'package:expense_monitor_app/global_widget/app_drawer.dart';
+
 import 'package:expense_monitor_app/global_widget/appbar_widget.dart';
-import 'package:expense_monitor_app/global_widget/bottomber_widget.dart';
+
 import 'package:expense_monitor_app/global_widget/open_drawer.dart';
 import 'package:expense_monitor_app/pages/home_page/home_page_widget/exp_total_widget.dart';
 import 'package:expense_monitor_app/pages/home_page/home_page_widget/header_widget.dart';
@@ -22,7 +22,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   SizedBox spacer([double height = 20])=> SizedBox(height: height,) ;
-  int index = 0;
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,11 +59,7 @@ class _HomePageState extends State<HomePage> {
 
       },) ,
       drawer:OpenDrawer.buildDrawer(),
-      bottomNavigationBar: BottomNavigationBarWidget(currentIndex: index , onTap: (value){
-        setState(() {
-          index = value;
-        });
-      }),
+      
       body: SizedBox(
         width: double.infinity,
         height: double.infinity,

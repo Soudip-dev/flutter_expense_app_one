@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:expense_monitor_app/model/expense_model.dart';
 import 'package:expense_monitor_app/model/user_model.dart';
 import 'package:expense_monitor_app/utils/app_constant.dart';
 import 'package:path/path.dart';
@@ -15,7 +16,9 @@ class DbHelper {
   static const String createTableUser = 
  "CREATE TABLE ${AppConstant.userTable} ( ${AppConstant.columnUserId} integer primary key autoincrement, ${AppConstant.columnUserName} TEXT, ${AppConstant.columnUserEmail} TEXT UNIQUE, ${AppConstant.columnUserPass} TEXT, ${AppConstant.columnUserMobNo} TEXT, ${AppConstant.columnUserCreatedAt} TEXT, ${AppConstant.columnUserImageUrl} TEXT)";
   
-  
+   
+    static const String createTableExp = "Create table ${AppConstant.expTable} ( ${AppConstant.columnExpId} integer primary key autoincrement, ${AppConstant.columnExpTitle} text, ${AppConstant.columnExpDesc} text, ${AppConstant.columnUserId} integer, ${AppConstant.columnExpType} integer, ${AppConstant.columnExpCatId} integer, ${AppConstant.columnExpAmt} real, ${AppConstant.columnExpBal} real, ${AppConstant.columnExpCreatedAt} text)" ;
+        
 
   Future<Database> getDb() async {
     if (_database != null) {
@@ -34,6 +37,7 @@ class DbHelper {
       version: 1,
       onCreate: (db, version) {
         db.execute(createTableUser);
+        db.execute(createTableExp);
       },
     );
     return db;
@@ -127,6 +131,47 @@ class DbHelper {
 
     // return UserModel.fromMap(data[data.length - 1]);
     return UserModel.fromMap(data.first);
+  }
+
+
+
+
+  // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Expense Helper >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+  
+  Future<bool> addExpense({required ExpenseModel newExpense}) async {
+    var db = await initDb();
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int uId = prefs.getInt(AppConstant.prefUserId) ?? 0;
+    newExpense.userId = uId;
+
+    int rowsEffected = await db.insert(
+      AppConstant.expTable, newExpense.toMap(),
+    );
+
+    return rowsEffected > 0;
+  }
+
+  Future<List<ExpenseModel>> getAllExpenses() async {
+    var db = await initDb();
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int uId = prefs.getInt(AppConstant.prefUserId) ?? 0;
+
+    var allExpMap = await db.query(
+      AppConstant.expTable,
+      where: "${AppConstant.columnUserId} = ?",
+      whereArgs: ["$uId"],
+    );
+
+    List<ExpenseModel> allExpensesModel = [];
+
+    for(Map<String, dynamic> eachExp in allExpMap){
+      allExpensesModel.add(ExpenseModel.fromMap(eachExp));
+    }
+
+    return allExpensesModel;
   }
   
 }

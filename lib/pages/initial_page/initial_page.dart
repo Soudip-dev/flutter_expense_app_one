@@ -1,5 +1,5 @@
 import 'package:expense_monitor_app/all_app_route/all_app_route.dart';
-import 'package:expense_monitor_app/pages/home_page/home_page.dart';
+
 import 'package:expense_monitor_app/utils/app_colors.dart';
 import 'package:expense_monitor_app/utils/app_constant.dart';
 import 'package:expense_monitor_app/utils/app_fonts.dart';
@@ -42,7 +42,7 @@ class InitialPage extends StatelessWidget {
          SharedPreferences pref  = await SharedPreferences.getInstance();
          int isLogin = await pref.getInt(AppConstant.prefUserId) ?? 0;
          if(isLogin != 0){
-          Navigator.pushReplacementNamed(context, AllAppRoute.homePageRoute);
+          Navigator.pushReplacementNamed(context, AllAppRoute.navPageRoute);
          }else{
 
         Navigator.pushReplacementNamed(context, AllAppRoute.loginPageRoute);

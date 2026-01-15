@@ -38,7 +38,7 @@ class _SplashPageState extends State<SplashPage> {
 
 Navigator.pushReplacementNamed(context, AllAppRoute.initialPageRoute);
         }else{
-        Navigator.pushReplacementNamed(context, AllAppRoute.homePageRoute);
+        Navigator.pushReplacementNamed(context, AllAppRoute.navPageRoute);
 
         }
        

@@ -1,3 +1,4 @@
+import 'package:expense_monitor_app/global_widget/color_grident.dart';
 import 'package:flutter/material.dart';
 
 class ExpTotalWidget extends StatelessWidget {
@@ -11,7 +12,8 @@ class ExpTotalWidget extends StatelessWidget {
             height: 150,
             padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 25),
             decoration: BoxDecoration(
-              color: Colors.blue,
+              // color: ColorGrident.primaryGradient,
+              gradient: ColorGrident.primaryGradient,
               borderRadius: BorderRadius.circular(10),
             
             ),

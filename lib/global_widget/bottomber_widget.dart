@@ -1,23 +1,53 @@
+import 'package:expense_monitor_app/pages/add_expense_page/add_expense_page.dart';
+import 'package:expense_monitor_app/pages/chart_page/chart_page.dart';
+import 'package:expense_monitor_app/pages/home_page/home_page.dart';
+import 'package:expense_monitor_app/pages/notification_page/notification_page.dart';
+import 'package:expense_monitor_app/pages/profile_page/profile_page.dart';
 import 'package:expense_monitor_app/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 
-class BottomNavigationBarWidget  extends StatelessWidget{
-  final int currentIndex;
-  final Function(int) onTap;
+class BottomNavigationBarWidget  extends StatefulWidget{
+  
+ 
     BottomNavigationBarWidget({
     super.key,
-    required this.currentIndex,
-    required this.onTap,
+    
+    
 
     });
 
+  @override
+  State<BottomNavigationBarWidget> createState() => _BottomNavigationBarWidgetState();
+}
+
+class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
+    List<Widget> pages = [
+      HomePage(),
+      ChartPage(),
+      AddExpensePage(),
+      NotificationPage(),
+      ProfilePage(),
+    ];
+
+    int currentIndex = 0;
+
+  @override
+
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
+    return Scaffold(
+      body: pages[currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+      
       currentIndex: currentIndex,
-      onTap: onTap,
+      onTap: (value){
+        currentIndex = value;
+        setState(() {
+          
+        });
+      },
       elevation: 10,
-      type: BottomNavigationBarType.shifting,
-      selectedItemColor: AppColors.primaryColor,
+      type: BottomNavigationBarType.fixed,
+      selectedItemColor:currentIndex == 2 ? Colors.white :AppColors.primaryColor,
       unselectedItemColor: Colors.grey.shade700,
      
       items:  [
@@ -30,7 +60,8 @@ class BottomNavigationBarWidget  extends StatelessWidget{
               // ,color: Colors.blue
             ),
             child:  Icon(Icons.home,color: Colors.grey.shade700,size: 28),),
-            label: "Home"
+            label: "Home",
+            
           
         ),
         BottomNavigationBarItem(
@@ -84,6 +115,7 @@ class BottomNavigationBarWidget  extends StatelessWidget{
           
         ),
       ],
+    )
     );
   }
 }

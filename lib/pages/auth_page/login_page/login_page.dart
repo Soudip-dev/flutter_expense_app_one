@@ -117,7 +117,7 @@ class LoginPage extends StatelessWidget {
                     ).showSnackBar(SnackBar(content: Text("Logged-in successfully!!"), backgroundColor: Colors.green,));
                     
                      
-                        Navigator.pushReplacementNamed(context, AllAppRoute.homePageRoute);
+                        Navigator.pushReplacementNamed(context, AllAppRoute.navPageRoute);
 
                     }
                     if(state is UserErrorState){
